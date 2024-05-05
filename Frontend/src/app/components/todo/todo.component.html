@@ -1,0 +1,46 @@
+<div class="todo-item" [ngClass]="{ 'completed': todo.completed, 'expired': todo.expired }">
+    <div class="checkbox-wrapper">
+        <input type="checkbox" [checked]="todo.completed" (change)="toggleCompletion()">
+    </div>
+    <div class="todo-content">
+        <span class="title">{{ todo.title }}</span>
+        <span *ngIf="todo.expired" class="expired-label">Expired</span>
+        <div class="due-date" *ngIf="todo.dueDate">Due date: {{ todo.dueDate | date }}</div>
+        <div class="createdBy">
+            <span>Created by: </span>
+            <span>{{ todo.createdBy?.fullName }}</span>
+            <img *ngIf="todo.createdBy && todo.createdBy.picture" [src]="todo.createdBy.picture" alt="Created by"
+                class="avatar">
+        </div>
+        <div class="assignedTo" *ngIf="todo.assignedTo">
+            <span>Assigned to: </span>
+            <span>{{ todo.assignedTo.fullName }}</span>
+            <img *ngIf="todo.assignedTo && todo.assignedTo.picture" [src]="todo.assignedTo.picture" alt="Assigned to"
+                class="avatar">
+        </div>
+        <br>
+        
+        <button *ngIf="!todo.assignedTo && isTodoCreatedByCurrentUser()" class="assign-button" (click)="openAssignTodoModal(assignTodoModal)">Assign</button>
+        <button *ngIf="todo.assignedTo && isTodoCreatedByCurrentUser()" class="assign-button" (click)="openAssignTodoModal(assignTodoModal)">Re-Assign</button>
+        <ng-template #assignTodoModal let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title">Assign Todo</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="onSubmit()" #form="ngForm">
+                    <div class="form-group">
+                        <label for="assignedTo">Assigned to</label>
+                        <select class="form-control" id="assignedTo" [(ngModel)]="selectedUserId" name="assignedTo">
+                            <option [value]="'none'">None</option>
+                            <option *ngFor="let user of users" [ngValue]="user.id">{{ user.fullName }}</option>
+                        </select>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Assign</button>
+                </form>
+            </div>
+        </ng-template>
+        

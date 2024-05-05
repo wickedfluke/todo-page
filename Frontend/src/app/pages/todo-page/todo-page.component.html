@@ -1,0 +1,49 @@
+<ng-template #addTodoModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Add Todo</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form (ngSubmit)="onSubmit()" #form="ngForm">
+            <div class="form-group">
+                <label for="title">Todo name</label>
+                <input type="text" class="form-control" id="title" [(ngModel)]="newTodo.title" name="title" required #title="ngModel">
+                <div *ngIf="title.invalid && (title.touched || form.submitted) && !formSubmittedSuccessfully" class="alert alert-danger">
+                    Todo's name is necessary
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="dueDate">Due date</label>
+                <input type="date" class="form-control" id="dueDate" [(ngModel)]="newTodo.dueDate" name="dueDate">
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="assignedTo">Assigned to</label>
+                <select class="form-control" id="assignedTo" [(ngModel)]="newTodo.assignedTo" name="assignedTo">
+                    <option *ngFor="let user of users" [ngValue]="user.id">{{ user.fullName }}</option>
+                </select>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</ng-template>
+
+
+<div class="todo-page">
+    <h1>TODO LIST</h1>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <button class="btn btn-lg btn-primary" (click)="openAddTodoModal(addTodoModal)">New Todo</button>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" (change)="toggleIncludeCompleted($event)"
+                id="showCompleted">
+            <label class="form-check-label" for="showCompleted">Show also completed todos</label>
+        </div>
+    </div>
+    <div class="todo-list">
+        <app-todo-list [todos]="todos"> </app-todo-list>
+    </div>
+</div>
