@@ -15,4 +15,5 @@ The project is working and running as intended
 
 ## Updates
 
-- After converting the modal into a component, the adding service does not show result immediately but it needs a refresh, so I kept the actual version 
+- After converting the modal into a component, the adding service does not show result immediately but it needs a refresh, so I kept the actual version
+- Trying to make the single todo modal into a component the code brokes completely
