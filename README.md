@@ -11,7 +11,7 @@ The project is working and running as intended
 
 - ~~The date sort for the todos should be done with [aggregate](https://www.mongodb.com/docs/manual/aggregation/)~~ | Archived
 
-- ~~[Modal](https://ng-bootstrap.github.io/#/components/modal/examples) as component and not writed into page's html~~ | See [updates](https://github.com/wickedfluke/todo-page/tree/main?tab=readme-ov-file#updates)
+- ~~[Modal](https://ng-bootstrap.github.io/#/components/modal/examples) as component and not writed into page's html~~ | Archived, see [updates](https://github.com/wickedfluke/todo-page/tree/main?tab=readme-ov-file#updates)
 
 ## Updates
 
