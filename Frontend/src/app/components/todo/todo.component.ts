@@ -23,10 +23,20 @@ export class TodoComponent {
 
   ngOnInit(): void {
     this.authService.currentUser$.subscribe(user => this.currentUser = user)
+    this.listuserid()
+    if(this.todo.assignedTo !== null){
+      this.listuserassgined()
+    }
+}
+  listuserid(): void {
     this.userService.getUsers().subscribe(users => {
       this.users = users.filter(user => user.id !== this.currentUser?.id)
-  })
-}
+  })}
+
+  listuserassgined(): void {
+    this.userService.getUsers().subscribe(users => {
+      this.users = users.filter(user => user.id !== this.currentUser?.id && user.id !== this.todo.assignedTo!.id)})
+  }
 
   toggleCompletion(): void {
 
@@ -82,6 +92,7 @@ export class TodoComponent {
       () => {
         this.todo.assignedTo = user;
         this.showUserListFlag = false;
+        this.listuserassgined()
       },
       (error) => {
         console.error('Error assigning todo:', error);
@@ -110,6 +121,7 @@ export class TodoComponent {
     if (this.selectedUserId === 'none') {
       this.todo.assignedTo = null;
       this.selectedUserId = '';
+      this.listuserid()
       return; 
     }
 
