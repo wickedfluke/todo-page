@@ -5,9 +5,9 @@ TodoPage created with Express and Angular
 The project is working and running as intended
 
 ## Bonus missings
-- Hide todos when checked as completed
+- ~~Hide todos when checked as completed~~ | Archived, I prefer this type of completion
 
-- In the assign option on todo component, the name of the user that have already the todo assigned to himself shouldn't be visible
+- ~~In the assign option on todo component, the name of the user that have already the todo assigned to himself shouldn't be visible~~ | Done
 
 - ~~The date sort for the todos should be done with [aggregate](https://www.mongodb.com/docs/manual/aggregation/)~~ | Archived
 
